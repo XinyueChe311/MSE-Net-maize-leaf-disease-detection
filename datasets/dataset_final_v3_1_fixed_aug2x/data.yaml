@@ -1,0 +1,15 @@
+path: /root/autodl-tmp/dataset_final_v3_1_fixed_aug2x
+train: images/train
+val: images/val
+test: images/test
+nc: 9
+names:
+  0: 普通锈病
+  1: 灰斑病
+  2: 玉米黑穗病
+  3: 南方锈病
+  4: 菲律宾玉米霜霉病
+  5: 玉米条纹病毒病
+  6: 玉米螟危害
+  7: 玉米螟幼虫
+  8: 健康
