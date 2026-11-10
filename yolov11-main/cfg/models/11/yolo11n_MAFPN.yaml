@@ -1,0 +1,68 @@
+# Ultralytics YOLO 🚀, AGPL-3.0 license
+# YOLO11n + MAFPN
+# 9-class maize leaf disease detection
+
+# Parameters
+nc: 9
+
+scales:
+  n: [0.50, 0.25, 1024]
+  s: [0.50, 0.50, 1024]
+  m: [0.50, 1.00, 512]
+  l: [1.00, 1.00, 512]
+  x: [1.00, 1.50, 512]
+
+
+# YOLO11n backbone
+backbone:
+  - [-1, 1, Conv, [64, 3, 2]]
+  - [-1, 1, Conv, [128, 3, 2]]
+  - [-1, 2, C3k2, [128, False, 0.25]]
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [-1, 2, C3k2, [256, False, 0.25]]
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [-1, 2, C3k2, [512, True]]
+  - [-1, 1, Conv, [1024, 3, 2]]
+  - [-1, 2, C3k2, [1024, True]]
+  - [-1, 1, SPPF, [1024, 5]]
+  - [-1, 2, C2PSA, [1024]]
+
+
+# YOLO11n head - MAFPN
+head:
+
+  # P5
+  - [6, 1, AVG, []]
+  - [[-1, 10], 1, Concat, [1]]
+  - [-1, 2, RepHMS, [256, 2, 1, 3, 9]]
+
+  # P5 -> P4
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [4, 1, AVG, []]
+  - [[-1, -2, 6], 1, Concat, [1]]
+  - [-1, 2, RepHMS, [256, 2, 1, 3, 7]]
+
+  # P4 -> P3
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [2, 1, AVG, []]
+  - [[-1, -2, 4], 1, Concat, [1]]
+  - [-1, 2, RepHMS, [256, 2, 1, 3, 5]]
+
+  # P3 refinement
+  - [[18, -1], 1, Concat, [1]]
+  - [-1, 2, RepHMS, [256, 2, 1, 3, 5]]
+
+  # P3 -> P4
+  - [21, 1, Conv, [256, 3, 2]]
+  - [23, 1, AVG, []]
+  - [[-1, -2, 17, 14], 1, Concat, [1]]
+  - [-1, 2, RepHMS, [512, 2, 1, 3, 7]]
+
+  # P4 -> P5
+  - [17, 1, Conv, [512, 3, 2]]
+  - [27, 1, AVG, []]
+  - [[-1, -2, 13], 1, Concat, [1]]
+  - [-1, 1, RepHMS, [512, 2, 1, 3, 9]]
+
+  # Detection
+  - [[23, 27, 31], 1, Detect, [nc]]
