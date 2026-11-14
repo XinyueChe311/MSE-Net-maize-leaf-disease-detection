@@ -126,7 +126,7 @@ The generated channel weights recalibrate the feature channels before the featur
 <!-- ![Detailed structures of MAFPN, SimAM, and ECA](Figures/REPLACE_WITH_ACTUAL_MODULE_FIGURE_FILENAME.png) -->
 
 ---
-<img width="692" height="391" alt="image" src="https://github.com/user-attachments/assets/8d7f0546-f674-4523-aa12-727a8a9014c1" />
+<img width="685" height="399" alt="image" src="https://github.com/user-attachments/assets/5db55fe9-258d-420b-9b3f-ac84a81bd613" />
 
 ## 📊Dataset
 
@@ -243,7 +243,7 @@ The contributions and interactions of MAFPN, SimAM, and ECA were evaluated using
 
 | No. | MAFPN | SimAM | ECA | Precision (%) | Recall (%) | mAP@0.5 (%) | mAP@0.5:0.95 (%) | Weights (MB) | Parameters | GFLOPs |
 |---:|:---:|:---:|:---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | × | × | × | 86.47 ± 0.25 | 80.37 ± 0.31 | 84.67 ± 0.23 | 71.67 ± 0.29 | 5.25 | 2,583,907 | 6.4 |
+| 1 | × | × | × | 86.57 ± 0.09 | 80.40 ± 0.22 | 84.63 ± 0.17 | 71.70 ± 0.22 | 5.25 | 2,583,907 | 6.4 |
 | 2 | × | ✓ | × | 85.20 ± 2.31 | 79.37 ± 2.01 | 83.47 ± 0.65 | 70.80 ± 0.82 | 5.25 | 2,583,907 | 6.4 |
 | 3 | × | × | ✓ | 87.90 ± 2.00 | 79.17 ± 0.51 | 84.57 ± 0.40 | 71.30 ± 0.79 | 5.03 | 2,464,760 | 5.4 |
 | 4 | ✓ | × | × | 85.87 ± 2.41 | 79.10 ± 2.29 | 83.77 ± 0.75 | 71.27 ± 1.27 | 4.75 | 2,246,207 | 5.9 |
